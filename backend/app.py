@@ -5,33 +5,49 @@ import sys
 from pathlib import Path
 
 
-PROJECT_DIR = (
-    Path(__file__).resolve().parent.parent
-)
+# --------------------------------------------------
+# Project paths
+# --------------------------------------------------
 
+PROJECT_DIR = Path(__file__).resolve().parent.parent
 SRC_DIR = PROJECT_DIR / "src"
 
-sys.path.append(
-    str(SRC_DIR)
-)
+sys.path.append(str(SRC_DIR))
 
+
+# --------------------------------------------------
+# Import prediction function
+# --------------------------------------------------
 
 from prediction import predict_attrition
 
 
+# --------------------------------------------------
+# Flask app
+# --------------------------------------------------
+
 app = Flask(__name__)
+
+
+# --------------------------------------------------
+# CORS
+# --------------------------------------------------
 
 CORS(
     app,
     resources={
-        r"/predict": {
-            "origins": "https://employee-attrition-capstone.netlify.app",
-            "methods": ["GET", "POST", "OPTIONS"],
-            "allow_headers": ["Content-Type"],
+        r"/*": {
+            "origins": [
+                "https://employee-attrition-capstone.netlify.app"
+            ]
         }
-    },
+    }
 )
 
+
+# --------------------------------------------------
+# Home route
+# --------------------------------------------------
 
 @app.route("/", methods=["GET"])
 def home():
@@ -41,11 +57,15 @@ def home():
     })
 
 
+# --------------------------------------------------
+# Prediction route
+# --------------------------------------------------
+
 @app.route("/predict", methods=["POST", "OPTIONS"])
 def predict():
 
+    # Handle browser CORS preflight request
     if request.method == "OPTIONS":
-
         return "", 204
 
     try:
@@ -58,9 +78,7 @@ def predict():
                 "error": "No employee data received"
             }), 400
 
-        result = predict_attrition(
-            employee_data
-        )
+        result = predict_attrition(employee_data)
 
         return jsonify(result)
 
@@ -70,6 +88,10 @@ def predict():
             "error": str(e)
         }), 500
 
+
+# --------------------------------------------------
+# Run locally
+# --------------------------------------------------
 
 if __name__ == "__main__":
 
