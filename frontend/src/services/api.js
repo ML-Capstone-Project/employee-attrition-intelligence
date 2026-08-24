@@ -10,13 +10,12 @@ const apiClient = axios.create({
 });
 
 /**
- * Sends employee profile data to the Flask ML backend endpoint POST /predict.
- * 
+ * Sends employee profile data to the Flask ML backend.
+ *
  * @param {Object} formData Raw form data from steps 1 & 2
  * @returns {Promise<{attrition: string, probability: number, risk: string}>}
  */
 export const predictAttrition = async (formData) => {
-  // Format payload precisely matching Flask API expectations
   const payload = {
     Age: Number(formData.Age),
     JobLevel: Number(formData.JobLevel),
@@ -33,10 +32,18 @@ export const predictAttrition = async (formData) => {
   };
 
   try {
-    const response = await apiClient.post(`${API_BASE_URL}/predict`, payload);
+    const response = await apiClient.post(
+      `${API_BASE_URL}/predict`,
+      payload
+    );
+
     return response.data;
   } catch (error) {
-    console.error('API Error when communicating with Flask backend:', error);
+    console.error(
+      'API Error when communicating with Flask backend:',
+      error
+    );
+
     throw error;
   }
 };
