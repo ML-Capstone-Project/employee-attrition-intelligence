@@ -3,7 +3,6 @@ import axios from 'axios';
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const apiClient = axios.create({
-  baseURL: API_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -34,7 +33,7 @@ export const predictAttrition = async (formData) => {
   };
 
   try {
-    const response = await apiClient.post('/predict', payload);
+    const response = await apiClient.post(`${API_BASE_URL}/predict`, payload);
     return response.data;
   } catch (error) {
     console.error('API Error when communicating with Flask backend:', error);
