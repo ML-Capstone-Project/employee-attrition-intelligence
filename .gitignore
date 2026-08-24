@@ -16,6 +16,8 @@ venv/
 # Local model artifacts
 *.joblib
 *.pkl
+!src/models/
+!src/models/*.pkl
 
 # Editor and OS files
 .vscode/
