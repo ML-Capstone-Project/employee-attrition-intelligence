@@ -21,7 +21,16 @@ from prediction import predict_attrition
 
 app = Flask(__name__)
 
-CORS(app)
+CORS(
+    app,
+    resources={
+        r"/predict": {
+            "origins": "https://employee-attrition-capstone.netlify.app",
+            "methods": ["GET", "POST", "OPTIONS"],
+            "allow_headers": ["Content-Type"],
+        }
+    },
+)
 
 
 @app.route("/", methods=["GET"])
