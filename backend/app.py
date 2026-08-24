@@ -33,12 +33,13 @@ def home():
     })
 
 
-@app.route("/predict", methods=["POST", "OPTIONS"])
+@app.route("/predict", methods=["OPTIONS"])
+def predict_options():
+    return "", 204
+
+
+@app.route("/predict", methods=["POST"])
 def predict():
-
-    if request.method == "OPTIONS":
-        return "", 204
-
     try:
         employee_data = request.get_json()
 
