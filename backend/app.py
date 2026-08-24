@@ -41,8 +41,12 @@ def home():
     })
 
 
-@app.route("/predict", methods=["POST"])
+@app.route("/predict", methods=["POST", "OPTIONS"])
 def predict():
+
+    if request.method == "OPTIONS":
+
+        return "", 204
 
     try:
 
