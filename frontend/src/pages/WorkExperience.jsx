@@ -95,7 +95,7 @@ export const WorkExperience = ({ formData, updateFormData, onBack, onResult }) =
                 <p className="font-bold text-rose-900">Backend Connection Notice</p>
                 <p className="mt-0.5 text-rose-700">{apiError}</p>
                 <p className="mt-1 text-[11px] text-rose-600 font-semibold">
-                  Make sure your Flask server is running at <code>http://localhost:5000</code> with route <code>POST /predict</code>.
+                  Make sure the prediction server is available with route <code>POST /predict</code>.
                 </p>
               </div>
             </div>
