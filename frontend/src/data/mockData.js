@@ -1,0 +1,14 @@
+export const HR_ACCOUNTS = [
+  { id: 'HR001', name: 'Priya Sharma', email: 'priya@demo.hr', password: 'demo123', role: 'HR Manager', department: 'HR Operations' },
+  { id: 'HR002', name: 'Rahul Kumar', email: 'rahul@demo.hr', password: 'demo123', role: 'HR Manager', department: 'HR Operations' },
+  { id: 'HR003', name: 'Ananya Reddy', email: 'ananya@demo.hr', password: 'demo123', role: 'HR Manager', department: 'HR Operations' },
+  { id: 'HR004', name: 'Sneha Rao', email: 'sneha@demo.hr', password: 'demo123', role: 'HR Manager', department: 'HR Operations' },
+  { id: 'HR005', name: 'Arjun Mehta', email: 'arjun@demo.hr', password: 'demo123', role: 'HR Manager', department: 'HR Operations' },
+];
+
+export const DEMO_EMPLOYEES = [
+  { id: 'EMP1001', name: 'Aarav Menon', email: 'aarav@demo.com', whatsapp: '+91 90000 10001', JobRole: 'Sales Executive', JobLevel: 2, YearsAtCompany: 4, YearsInCurrentRole: 2, YearsWithCurrManager: 2, JobSatisfaction: 3, EnvironmentSatisfaction: 3, JobInvolvement: 3, WorkLifeBalance: 3, OverTime: 'Yes', Age: 29, MonthlyIncome: 5200, prediction: 'Yes', probability: 74.2, risk: 'High', selectedHrId: 'HR001', submissionStatus: 'Submitted', reviewStatus: 'Pending', decision: null, note: '' },
+  { id: 'EMP1002', name: 'Meera Iyer', email: 'meera@demo.com', whatsapp: '+91 90000 10002', JobRole: 'Research Scientist', JobLevel: 3, YearsAtCompany: 7, YearsInCurrentRole: 4, YearsWithCurrManager: 3, JobSatisfaction: 4, EnvironmentSatisfaction: 4, JobInvolvement: 4, WorkLifeBalance: 4, OverTime: 'No', Age: 35, MonthlyIncome: 8300, prediction: 'No', probability: 18.6, risk: 'Low', selectedHrId: 'HR001', submissionStatus: 'Submitted', reviewStatus: 'Under Review', decision: null, note: 'Schedule a development check-in.', hrName: 'Priya Sharma' },
+  { id: 'EMP1003', name: 'Kabir Shah', email: 'kabir@demo.com', whatsapp: '+91 90000 10003', JobRole: 'Manager', JobLevel: 4, YearsAtCompany: 10, YearsInCurrentRole: 5, YearsWithCurrManager: 5, JobSatisfaction: 2, EnvironmentSatisfaction: 2, JobInvolvement: 3, WorkLifeBalance: 2, OverTime: 'Yes', Age: 42, MonthlyIncome: 12500, prediction: 'Yes', probability: 81.5, risk: 'High', selectedHrId: 'HR001', submissionStatus: 'Submitted', reviewStatus: 'Reviewed', decision: 'Continued', note: 'Retention plan agreed.', hrName: 'Priya Sharma' },
+  { id: 'EMP1004', name: 'Nisha Verma', email: 'nisha@demo.com', whatsapp: '+91 90000 10004', JobRole: 'Laboratory Technician', JobLevel: 1, YearsAtCompany: 2, YearsInCurrentRole: 1, YearsWithCurrManager: 1, JobSatisfaction: 2, EnvironmentSatisfaction: 2, JobInvolvement: 2, WorkLifeBalance: 2, OverTime: 'Yes', Age: 26, MonthlyIncome: 3900, prediction: 'Yes', probability: 69.8, risk: 'Medium', selectedHrId: 'HR002', submissionStatus: 'Submitted', reviewStatus: 'Reviewed', decision: 'Discontinued', note: 'Role requirements discussed.', hrName: 'Rahul Kumar' },
+];

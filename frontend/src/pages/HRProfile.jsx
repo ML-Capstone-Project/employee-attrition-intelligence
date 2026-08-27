@@ -1,0 +1,11 @@
+import React from 'react';
+import { Edit3, Mail, ShieldCheck } from 'lucide-react';
+import HRLayout from '../components/HRLayout';
+import HRAvatar from '../components/HRAvatar';
+import BackButton from '../components/BackButton';
+import { useAuth } from '../context/AuthContext';
+
+export default function HRProfile() {
+  const { user } = useAuth();
+  return <HRLayout><div className="mx-auto max-w-4xl px-5 py-8 lg:px-10"><BackButton to="/hr/dashboard">Back to HR Dashboard</BackButton><div className="mt-7 border border-slate-200 bg-white p-6 shadow-sm sm:p-8"><div className="flex flex-col gap-5 border-b border-slate-100 pb-7 sm:flex-row sm:items-center"><HRAvatar user={user} size="h-20 w-20" /><div><p className="text-sm font-bold text-indigo-600">Personal account</p><h1 className="mt-1 text-3xl font-black text-slate-950">{user.name}</h1><p className="mt-2 text-sm text-slate-500">{user.role || 'HR Manager'} · {user.department || 'HR Operations'}</p></div><button type="button" className="inline-flex items-center gap-2 rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-bold text-slate-600 sm:ml-auto"><Edit3 size={16} /> Edit Profile</button></div><div className="grid gap-6 pt-7 sm:grid-cols-2"><div><p className="text-xs font-bold uppercase tracking-widest text-slate-400">Full Name</p><p className="mt-2 font-bold text-slate-800">{user.name}</p></div><div><p className="text-xs font-bold uppercase tracking-widest text-slate-400">HR ID</p><p className="mt-2 font-bold text-slate-800">{user.id}</p></div><div><p className="text-xs font-bold uppercase tracking-widest text-slate-400">Email</p><p className="mt-2 flex items-center gap-2 font-bold text-slate-800"><Mail size={16} className="text-indigo-500" />{user.email}</p></div><div><p className="text-xs font-bold uppercase tracking-widest text-slate-400">Role</p><p className="mt-2 font-bold text-slate-800">{user.role || 'HR Manager'}</p></div><div><p className="text-xs font-bold uppercase tracking-widest text-slate-400">Department</p><p className="mt-2 font-bold text-slate-800">{user.department || 'HR Operations'}</p></div><div><p className="text-xs font-bold uppercase tracking-widest text-slate-400">Account Status</p><p className="mt-2 flex items-center gap-2 font-bold text-emerald-700"><ShieldCheck size={16} /> Active</p></div></div></div></div></HRLayout>;
+}

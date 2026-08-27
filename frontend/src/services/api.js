@@ -9,6 +9,12 @@ const apiClient = axios.create({
   timeout: 60000,
 });
 
+apiClient.interceptors.request.use((config) => {
+  const token = localStorage.getItem('authToken');
+  if (token) config.headers.Authorization = `Bearer ${token}`;
+  return config;
+});
+
 /**
  * Sends employee profile data to the Flask ML backend.
  *
@@ -47,5 +53,29 @@ export const predictAttrition = async (formData) => {
     throw error;
   }
 };
+
+export const loginEmployee = async (email, password) => {
+  const response = await apiClient.post(`${API_BASE_URL}/api/auth/employee/login`, { email, password });
+  localStorage.setItem('authToken', response.data.token);
+  return { ...response.data.user, id: response.data.user.employee_id, employeeId: response.data.user.employee_id, whatsapp: response.data.user.whatsapp_number };
+};
+
+export const signupEmployee = async (account) => {
+  const response = await apiClient.post(`${API_BASE_URL}/api/auth/employee/signup`, { name: account.name, employee_id: account.employeeId, email: account.email, password: account.password, whatsapp_number: account.whatsapp });
+  return response.data.employee;
+};
+
+export const loginHR = async (email, password, accounts) => {
+  const response = await apiClient.post(`${API_BASE_URL}/api/auth/hr/login`, { email, password });
+  localStorage.setItem('authToken', response.data.token);
+  return { ...response.data.user, id: response.data.user.hr_id };
+};
+
+export const submitAssessment = async (assessment) => (await apiClient.post(`${API_BASE_URL}/api/assessments`, assessment)).data;
+export const getEmployeesForHR = async () => (await apiClient.get(`${API_BASE_URL}/api/hr/employees`)).data.employees;
+export const getEmployeeDetails = async (employeeId) => (await apiClient.get(`${API_BASE_URL}/api/hr/employees/${employeeId}`)).data.employee;
+export const saveHRDecision = async (employeeId, decision) => (await apiClient.post(`${API_BASE_URL}/api/hr/employees/${employeeId}/review`, decision)).data;
+export const getEmployeeStatus = async () => (await apiClient.get(`${API_BASE_URL}/api/employee/status`)).data.employee;
+export const getHRDashboard = async () => (await apiClient.get(`${API_BASE_URL}/api/hr/dashboard`)).data;
 
 export default apiClient;

@@ -4,3 +4,8 @@ pandas
 scikit-learn
 joblib
 gunicorn
+pymongo
+python-dotenv
+PyJWT
+flask-socketio
+requests

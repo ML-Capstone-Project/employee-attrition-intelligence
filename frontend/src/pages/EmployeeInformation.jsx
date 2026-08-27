@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Calendar, DollarSign, BarChart3, Briefcase, Building, UserCheck, Users, ArrowRight } from 'lucide-react';
+import { Calendar, BarChart3, Briefcase, Building, UserCheck, Users, ArrowRight, Mail, Phone, Badge } from 'lucide-react';
 import WorkforceVisual from '../components/WorkforceVisual';
 import ProgressIndicator from '../components/ProgressIndicator';
 import FormInput from '../components/FormInput';
@@ -106,7 +106,16 @@ export const EmployeeInformation = ({ formData, updateFormData, onNext }) => {
 
           {/* Form Fields Grid */}
           <form onSubmit={handleContinue} className="space-y-5">
-            
+            <div className="border-b border-slate-100 pb-5">
+              <p className="mb-3 text-xs font-bold uppercase tracking-wider text-indigo-600">Personal & Contact Information</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <FormInput label="Employee Name" name="name" value={formData.name || ''} onChange={handleChange} icon={UserCheck} placeholder="Full name" required />
+                <FormInput label="Employee ID" name="employeeId" value={formData.employeeId || ''} onChange={handleChange} icon={Badge} placeholder="EMP1005" required />
+                <FormInput label="Email" name="email" type="email" value={formData.email || ''} onChange={handleChange} icon={Mail} placeholder="employee@example.com" required />
+                <FormInput label="WhatsApp Number" name="whatsapp" value={formData.whatsapp || ''} onChange={handleChange} icon={Phone} placeholder="+91 90000 00000" required />
+              </div>
+            </div>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <FormInput
                 label="Age"

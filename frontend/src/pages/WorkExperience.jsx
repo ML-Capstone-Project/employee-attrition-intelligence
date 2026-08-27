@@ -3,7 +3,6 @@ import { ArrowLeft, Sparkles, AlertCircle, RefreshCw, Layers } from 'lucide-reac
 import WorkforceVisual from '../components/WorkforceVisual';
 import ProgressIndicator from '../components/ProgressIndicator';
 import RatingSelector from '../components/RatingSelector';
-import { predictAttrition } from '../services/api';
 
 const RATING_1_TO_4 = [
   { value: 1, label: 'Low' },
@@ -24,7 +23,7 @@ const OVERTIME_OPTIONS = [
   { value: 'Yes', label: 'Frequently / Required' },
 ];
 
-export const WorkExperience = ({ formData, updateFormData, onBack, onResult }) => {
+export const WorkExperience = ({ formData, updateFormData, onBack, onAssessmentComplete }) => {
   const [loading, setLoading] = useState(false);
   const [apiError, setApiError] = useState(null);
 
@@ -39,10 +38,9 @@ export const WorkExperience = ({ formData, updateFormData, onBack, onResult }) =
     setApiError(null);
 
     try {
-      const response = await predictAttrition(formData);
-      onResult(response);
+      onAssessmentComplete(formData);
     } catch (err) {
-      console.error('Error fetching prediction from Flask API:', err);
+      console.error('Error completing assessment:', err);
       const errMsg = err.response?.data?.error || 'Unable to connect to the prediction server. Please make sure the Flask backend is running.';
       setApiError(errMsg);
     } finally {
@@ -174,12 +172,12 @@ export const WorkExperience = ({ formData, updateFormData, onBack, onResult }) =
                 {loading ? (
                   <>
                     <RefreshCw className="w-5 h-5 animate-spin" />
-                    <span>Assessing employee profile...</span>
+                    <span>Submitting assessment...</span>
                   </>
                 ) : (
                   <>
                     <Sparkles className="w-5 h-5 text-indigo-200" />
-                    <span>Assess Attrition Risk</span>
+                    <span>Submit Assessment</span>
                   </>
                 )}
               </button>
