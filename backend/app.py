@@ -124,8 +124,8 @@ if not app.config["JWT_SECRET"]:
 app.config["WHATSAPP_ACCESS_TOKEN"] = os.getenv("WHATSAPP_ACCESS_TOKEN", "")
 app.config["WHATSAPP_PHONE_NUMBER_ID"] = os.getenv("WHATSAPP_PHONE_NUMBER_ID", "")
 app.config["WHATSAPP_API_VERSION"] = os.getenv("WHATSAPP_API_VERSION", "v20.0")
-origins = [item.strip() for item in os.getenv("FRONTEND_URL", "http://localhost:5173").split(",") if item.strip()]
-CORS(app, origins=origins, supports_credentials=False)
+origins = list(dict.fromkeys(["http://localhost:5173", "https://employee-attrition-capstone.netlify.app", *[item.strip() for item in os.getenv("FRONTEND_URL", "").split(",") if item.strip()]]))
+CORS(app, resources={r"/api/*": {"origins": origins}}, supports_credentials=False)
 socketio = SocketIO(app, cors_allowed_origins=origins) if SocketIO else None
 
 mongo_uri = os.getenv("MONGODB_URI")
